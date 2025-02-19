@@ -31,8 +31,6 @@ if 'output_result_string' not in st.session_state:
 
 #### End of Initialisation (Mandatory)
 
-
-
 #### Start of API Key Management (Optional)
 # Delete all key management if you want to hard-code your own keys.
 # Make sure you use the correct key names, which are:
@@ -210,7 +208,7 @@ with st.form('modifying_prompt_input_form'):
         st.session_state.modifying_prompt = modifying_prompt_text
 
         completion = openAI_client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": st.session_state.input_result_string},
                 {"role": "user", "content": st.session_state.modifying_prompt}
@@ -244,7 +242,7 @@ output_type = st.radio(
     index=None, horizontal=True, label_visibility='collapsed'
 )
 
-# Image Upload
+# Image Generation
 if output_type == ":rainbow[Image]":
     if st.button('Generate Image'):
         #if check_openai_key():  # Key Checker
@@ -295,8 +293,6 @@ elif output_type == "CAD Model (Experimental)":
         st.warning("Please enter your ZOO CAD API Key in the settings to generate the 3D model.")
     else:
         client = Client(token=zoo_cad_api_key)
-        st.info(
-            '**Straight from their [API documentation](https://zoo.dev/docs/api/ai/generate-a-cad-model-from-text?lang=python):** "This is an alpha endpoint. It will change in the future. The current output is honestly pretty bad. So if you find this endpoint, you get what you pay for, which currently is nothing. But in the future will be made a lot better."')
         cad_prompt_submitted = st.button("Submit")
 
         if cad_prompt_submitted:

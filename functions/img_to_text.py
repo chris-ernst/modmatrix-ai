@@ -13,14 +13,14 @@ def describe_image(image_file, openai_api_key):
     }
 
     payload = {
-        "model": "gpt-4-vision-preview",
+        "model": "gpt-4o",
         "messages": [
             {
                 "role": "user",
                 "content": [
                     {
                         "type": "text",
-                        "text": "What’s in this image?"
+                        "text": "What’s in this image? If it is a person, I don't need you to identify this person but describe them instead."
                     },
                     {
                         "type": "image_url",
